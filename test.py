@@ -1,4 +1,6 @@
 import unittest
+from unittest import mock
+from unittest.mock import MagicMock
 
 from greeting import greeting
 
@@ -14,7 +16,9 @@ class GreetingTests(unittest.TestCase):
         self.assertEqual(self.greeting.greet(), 'Hello, Belinda')
 
     def test_that_it_prints(self):
-        pass        
+        greeting.print = MagicMock()
+        self.greeting.print_bye()
+        greeting.print.assert_called_with('bye')
 
 if __name__ == "__main__":
     unittest.main()
